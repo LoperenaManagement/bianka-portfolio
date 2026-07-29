@@ -1,15 +1,16 @@
 <!--
   ══════════════════════════════════════════════════════════════
   BIANKA GARCIA — UGC PORTFOLIO
-  Single file. See README.md for how to put it online free.
 
   YOU EDIT THREE THINGS, ALL AT THE TOP OF THE <script>:
     1. HERO   — the big portrait and her name
     2. WORK   — the videos in the phone feed
-    3. PRICES — the package builder numbers
-  Anything else worth changing is marked  EDIT
+    3. SCOPE  — the options in the brief builder (no prices)
 
-  Media goes in a folder called  media  next to this file.
+  Media lives in a folder called  Media  next to this file.
+  Capital M. GitHub Pages is case sensitive, so Media/ and
+  media/ are different folders and only one of them works.
+
   Missing files fall back to a labelled placeholder, never a
   broken frame, so the page always looks finished.
   ══════════════════════════════════════════════════════════════
@@ -78,18 +79,13 @@ a{color:inherit}
 .btn-lime{background:var(--lime);border-color:var(--ink);color:var(--ink);font-weight:700}
 .btn-lime:hover{transform:translateY(-3px);box-shadow:0 10px 0 -4px var(--magenta)}
 
-/* portrait */
 .portrait{position:relative;max-width:400px;margin:0 auto;transform:rotate(-1.6deg)}
 .portrait-media{position:relative;aspect-ratio:4/5;border-radius:16px 16px 0 0;overflow:hidden;background:var(--plum);border:5px solid #fff;border-bottom:0;box-shadow:0 26px 60px rgba(150,40,90,.3)}
 .portrait-media img,.portrait-media video{width:100%;height:100%;object-fit:cover;display:block}
 .nameplate{background:var(--magenta);color:#fff;border:5px solid #fff;border-top:0;border-radius:0 0 16px 16px;padding:16px 20px 18px;box-shadow:0 26px 60px rgba(150,40,90,.3)}
 .nameplate h2{font-family:var(--disp);font-weight:800;font-size:clamp(24px,3.4vw,34px);letter-spacing:-.035em;line-height:1;margin:0 0 6px;text-transform:uppercase}
 .nameplate p{margin:0;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;opacity:.85}
-.sticker{
-  position:absolute;top:-18px;right:-14px;z-index:3;background:var(--lime);border:2px solid var(--ink);
-  border-radius:100px;padding:11px 16px;font-family:var(--disp);font-weight:800;font-size:12px;
-  text-transform:uppercase;letter-spacing:.02em;transform:rotate(9deg);box-shadow:0 6px 0 -1px var(--ink);
-}
+.sticker{position:absolute;top:-18px;right:-14px;z-index:3;background:var(--lime);border:2px solid var(--ink);border-radius:100px;padding:11px 16px;font-family:var(--disp);font-weight:800;font-size:12px;text-transform:uppercase;letter-spacing:.02em;transform:rotate(9deg);box-shadow:0 6px 0 -1px var(--ink)}
 .ph{width:100%;height:100%;display:flex;align-items:flex-end;padding:14px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:linear-gradient(150deg,var(--hot),var(--magenta) 55%,var(--tang))}
 
 /* ── marquee ─────────────────────────────── */
@@ -159,17 +155,17 @@ a{color:inherit}
 .step p{margin:0;font-size:14px;color:var(--muted);line-height:1.5}
 .step:hover p{color:var(--ink)}
 
-/* ── builder ─────────────────────────────── */
+/* ── brief builder ───────────────────────── */
 .build-sec{background:var(--hot);border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
 .build{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(20px,4vw,44px);align-items:start}
 @media(max-width:880px){.build{grid-template-columns:1fr}}
 .panel{background:var(--cream);border:2px solid var(--ink);border-radius:16px;padding:clamp(20px,3vw,32px)}
-.qty{display:flex;align-items:center;gap:14px;margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--line)}
+.qty{display:flex;align-items:center;gap:14px;margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid var(--line)}
 .qty label{font-family:var(--disp);font-weight:700;font-size:17px;flex:1}
 .stepper{display:flex;align-items:center;gap:4px}
-.stepper button{width:38px;height:38px;border:2px solid var(--ink);background:var(--cream);border-radius:100px;font-size:19px;cursor:pointer;font-family:var(--body);line-height:1}
+.stepper button{width:38px;height:38px;border:2px solid var(--ink);background:var(--cream);border-radius:100px;font-size:19px;cursor:pointer;font-family:var(--body);line-height:1;color:var(--ink)}
 .stepper button:hover{background:var(--lime)}
-.stepper output{font-family:var(--disp);font-weight:800;font-size:22px;min-width:38px;text-align:center}
+.stepper output{font-family:var(--disp);font-weight:800;font-size:22px;min-width:38px;text-align:center;color:var(--ink)}
 .grp{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--magenta);margin:0 0 4px}
 .grp + .opts{margin-bottom:24px}
 .fine{font-size:12.5px;color:var(--muted);line-height:1.5;margin:20px 0 0;padding-top:16px;border-top:1px solid var(--line)}
@@ -178,15 +174,13 @@ a{color:inherit}
 .opts label{display:flex;align-items:center;gap:14px;padding:15px 0;cursor:pointer}
 .opts input{width:20px;height:20px;accent-color:var(--magenta);cursor:pointer;flex:none}
 .opts input:disabled{cursor:not-allowed}
-.opts li[style*=".4"] label{cursor:not-allowed}
 .opts .name{flex:1;font-weight:500;font-size:15px}
-.opts .amt{font-family:var(--mono);font-size:13px;color:var(--muted)}
 .total{background:var(--plum);color:var(--blush);border:2px solid var(--ink);border-radius:16px;padding:clamp(22px,3vw,32px);position:sticky;top:80px}
-.total .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--lime);margin:0 0 8px}
-.total .big{font-family:var(--disp);font-weight:800;font-size:clamp(44px,7vw,64px);letter-spacing:-.045em;line-height:1;margin:0 0 6px}
-.total .small{font-size:13px;color:rgba(255,237,243,.6);margin:0 0 22px}
-.recap{list-style:none;margin:0 0 24px;padding:0;font-family:var(--mono);font-size:12px;line-height:1.9;color:rgba(255,237,243,.85)}
-.recap li{display:flex;justify-content:space-between;gap:14px}
+.total .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--lime);margin:0 0 16px}
+.recap{list-style:none;margin:0 0 24px;padding:0;font-family:var(--mono);font-size:12.5px;line-height:1.6;color:rgba(255,237,243,.9)}
+.recap li{padding:9px 0 9px 18px;position:relative;border-top:1px solid var(--line-d)}
+.recap li:first-child{border-top:0}
+.recap li::before{content:"";position:absolute;left:0;top:17px;width:8px;height:1px;background:var(--lime)}
 .total .btn{width:100%;text-align:center}
 
 /* ── contact ─────────────────────────────── */
@@ -224,11 +218,10 @@ footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
     <div>
       <p class="eyebrow">UGC creator · North NJ / NYC metro</p>
       <h1>Beauty<br><span class="pink">Travel</span><br><span class="out">vertical</span></h1>
-      <!-- EDIT: this line is the entire pitch -->
       <p class="lede">Hotel walkthroughs and beauty routines that look like a friend's recommendation, not an ad.</p>
       <p class="sub">Shot in natural light, edited for paid social, delivered raw and cut. Travels for shoots.</p>
       <div class="btnrow">
-        <a class="btn btn-solid" href="#build">Build a package</a>
+        <a class="btn btn-solid" href="#build">Start a brief</a>
         <a class="btn btn-ghost" href="https://www.tiktok.com/@.biankagarcia" target="_blank" rel="noopener">Watch on TikTok</a>
       </div>
     </div>
@@ -301,7 +294,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
 <section class="sec build-sec" id="build">
   <div class="wrap">
     <div class="sec-head rv">
-      <h2>Build your <span class="it" style="color:var(--plum)">package</span></h2>
+      <h2>Build your <span class="it" style="color:var(--plum)">brief</span></h2>
       <p class="note" style="color:var(--plum)">Tick what you need. The email writes itself.</p>
     </div>
     <div class="build">
@@ -318,12 +311,12 @@ footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
         <ul class="opts" id="tiers"></ul>
         <p class="grp">Extras</p>
         <ul class="opts" id="opts"></ul>
-        <p class="fine">The base fee covers the video plus organic use on your own channels. Paid placement is licensed separately.</p>
+        <p class="fine">Every project includes the video plus organic use on your own channels. Paid placement, whitelisting and exclusivity are licensed separately and quoted per campaign.</p>
       </div>
       <div class="total">
-        <p class="kicker">Estimate</p>
+        <p class="kicker">Your brief</p>
         <ul class="recap" id="recap"></ul>
-        <a class="btn btn-lime" id="send" href="#">Email this package</a>
+        <a class="btn btn-lime" id="send" href="#">Email this brief</a>
       </div>
     </div>
   </div>
@@ -337,7 +330,6 @@ footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
       <p class="note">Bianka Garcia, represented by Loperena Management. Rates, availability and usage terms on request. Same-day reply.</p>
     </div>
     <div class="links">
-      <!-- EDIT: swap the gmail for a domain address when you have one -->
       <a href="mailto:loperenamanagementllc@gmail.com"><span>Email</span> loperenamanagementllc@gmail.com</a>
       <a href="https://www.tiktok.com/@.biankagarcia" target="_blank" rel="noopener"><span>TikTok</span> @.biankagarcia</a>
       <a href="https://www.instagram.com/bianka_g" target="_blank" rel="noopener"><span>Instagram</span> @bianka_g</a>
@@ -355,9 +347,6 @@ footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
 <script>
 /* ══════════════════════════════════════════════════════
    1. HERO — the big portrait at the top
-      img:   "media/bianka.jpg"   (a photo of her, portrait crop)
-      video: "media/bianka.mp4"   (optional, plays on loop, no sound)
-      Use one or the other. Video wins if both are filled.
    ══════════════════════════════════════════════════════ */
 const HERO = {
   name: "Bianka Garcia",
@@ -369,12 +358,8 @@ const HERO = {
 
 /* ══════════════════════════════════════════════════════
    2. THE FEED
-      tag:   "beauty" or "travel"
-      video: "media/clip1.mp4"  — plays automatically, muted
-      img:   "media/clip1.jpg"  — the still, also used as the
-             video's poster while it loads
-      views: real TikTok view count as a string, or null
-      url:   the actual TikTok link, or "#"
+      img: add a still here and it becomes the video's
+      loading poster, which stops the black flash
    ══════════════════════════════════════════════════════ */
 const WORK = [
   { tag:"beauty", title:"Rhode kit unboxing", desc:"Unboxing straight into first application in a single take. Product stays label-forward through the whole hook.", img:null, video:"Media/rhode_kit.mp4", views:null, url:"#", meta:["Single take","Product hero","28 sec"] },
@@ -387,6 +372,30 @@ const WORK = [
   { tag:"travel", title:"Governors Island spa", desc:"Day-trip experience piece. Location, treatment and payoff inside twenty-five seconds.", img:null, video:"Media/governors_island_spa.mp4", views:null, url:"#", meta:["Day trip","Experience","25 sec"] }
 ];
 
+/* ══════════════════════════════════════════════════════
+   3. SCOPE — the brief builder. No prices anywhere, by
+   design: the brand tells you what they want, you quote
+   after you've seen it.
+      months     — how long, shown in the emailed brief
+      needsPaid  — option greys out unless a paid tier
+                   is selected (whitelisting is a paid right)
+   ══════════════════════════════════════════════════════ */
+const SCOPE = {
+  usage: [
+    { id:"organic", name:"Organic only, brand channels", months:3 },
+    { id:"paid3",   name:"Paid ads, 3 months",           months:3 },
+    { id:"paid6",   name:"Paid ads, 6 months",           months:6 },
+    { id:"perp",    name:"Perpetual rights",             months:12 }
+  ],
+  addons: [
+    { id:"hooks", name:"Extra hook variation per video" },
+    { id:"raw",   name:"Raw footage library" }
+  ],
+  monthly: [
+    { id:"white", name:"Whitelisting / Spark Ads", needsPaid:true },
+    { id:"excl",  name:"Category exclusivity",     needsPaid:false }
+  ]
+};
 const EMAIL = "loperenamanagementllc@gmail.com";
 
 /* ══ nothing below here needs editing ══════════════════ */
@@ -409,29 +418,30 @@ document.getElementById('heroRole').textContent = HERO.role;
 document.getElementById('sticker').textContent = HERO.badge;
 document.getElementById('heroMedia').innerHTML = media(HERO, 'Portrait goes here');
 const hv = document.querySelector('#heroMedia video');
-if(hv && !calm) hv.play().catch(()=>{});
+if(hv && !calm) hv.play().catch(function(){});
 
 /* ── marquee ─────────────────────────────── */
 const words = ["UGC","Hotel walkthroughs","GRWM","Skincare","Resort b-roll","Paid social ready","North NJ / NYC"];
-const line = words.map(w => w + '<i class="dot"></i>').join("");
+const line = words.map(function(w){ return w + '<i class="dot"></i>'; }).join("");
 document.getElementById('mq').innerHTML = '<span>' + line + '</span><span>' + line + '</span>';
 
 /* ── feed ────────────────────────────────── */
-const screen = document.getElementById('screen');
+const screenEl = document.getElementById('screen');
 const dots = document.getElementById('dots');
 let view = WORK;
 
-function build(filter){
-  view = WORK.filter(w => filter === 'all' || w.tag === filter);
-  screen.innerHTML = view.map((w, i) =>
-    '<article class="slide" data-i="' + i + '">' +
+function buildFeed(filter){
+  view = WORK.filter(function(w){ return filter === 'all' || w.tag === filter; });
+  screenEl.innerHTML = view.map(function(w, i){
+    return '<article class="slide" data-i="' + i + '">' +
       media(w, w.tag + ' · media goes here') +
       '<span class="slide-tag ' + w.tag + '">' + w.tag + '</span>' +
       (w.views ? '<div class="slide-views"><b>' + w.views + '</b>views</div>' : '') +
       '<div class="slide-ui"><div class="u">@.biankagarcia</div><div class="t">' + w.title + '</div></div>' +
-    '</article>').join('');
-  dots.innerHTML = view.map((_, i) => '<i' + (i === 0 ? ' class="on"' : '') + '></i>').join('');
-  screen.scrollTop = 0;
+    '</article>';
+  }).join('');
+  dots.innerHTML = view.map(function(_, i){ return '<i' + (i === 0 ? ' class="on"' : '') + '></i>'; }).join('');
+  screenEl.scrollTop = 0;
   show(0);
   observe();
 }
@@ -442,75 +452,75 @@ function show(i){
   document.getElementById('dKick').textContent = w.tag === 'beauty' ? 'Beauty' : 'Travel & hospitality';
   document.getElementById('dTitle').textContent = w.title;
   document.getElementById('dDesc').textContent = w.desc;
-  document.getElementById('dMeta').innerHTML = (w.meta || []).map(m => '<span class="pill">' + m + '</span>').join('');
+  document.getElementById('dMeta').innerHTML = (w.meta || []).map(function(m){
+    return '<span class="pill">' + m + '</span>';
+  }).join('');
   const link = document.getElementById('dLink');
   link.href = w.url;
   link.style.display = (w.url && w.url !== '#') ? 'inline-block' : 'none';
-  Array.from(dots.children).forEach((d, j) => d.classList.toggle('on', j === i));
+  Array.prototype.forEach.call(dots.children, function(d, j){ d.classList.toggle('on', j === i); });
 }
 
 /* only the slide you're looking at plays, so the page stays light */
 let io;
 function observe(){
   if(io) io.disconnect();
-  io = new IntersectionObserver(entries => {
-    entries.forEach(e => {
+  io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
       const vid = e.target.querySelector('video');
       if(e.isIntersecting){
         show(Number(e.target.dataset.i));
-        if(vid && !calm) vid.play().catch(()=>{});
+        if(vid && !calm) vid.play().catch(function(){});
       } else if(vid){
         vid.pause();
       }
     });
-  }, { root: screen, threshold: .6 });
-  screen.querySelectorAll('.slide').forEach(s => io.observe(s));
+  }, { root: screenEl, threshold: .6 });
+  screenEl.querySelectorAll('.slide').forEach(function(s){ io.observe(s); });
 }
-build('all');
+buildFeed('all');
 
-document.querySelectorAll('.chip').forEach(c => {
-  c.addEventListener('click', () => {
-    document.querySelectorAll('.chip').forEach(x => x.setAttribute('aria-pressed','false'));
+document.querySelectorAll('.chip').forEach(function(c){
+  c.addEventListener('click', function(){
+    document.querySelectorAll('.chip').forEach(function(x){ x.setAttribute('aria-pressed','false'); });
     c.setAttribute('aria-pressed','true');
-    build(c.dataset.filter);
+    buildFeed(c.dataset.filter);
   });
 });
-screen.addEventListener('keydown', e => {
-  const h = screen.clientHeight;
-  if(e.key === 'ArrowDown'){ screen.scrollBy({ top: h, behavior:'smooth' }); e.preventDefault(); }
-  if(e.key === 'ArrowUp'){ screen.scrollBy({ top: -h, behavior:'smooth' }); e.preventDefault(); }
+screenEl.addEventListener('keydown', function(e){
+  const h = screenEl.clientHeight;
+  if(e.key === 'ArrowDown'){ screenEl.scrollBy({ top: h, behavior:'smooth' }); e.preventDefault(); }
+  if(e.key === 'ArrowUp'){ screenEl.scrollBy({ top: -h, behavior:'smooth' }); e.preventDefault(); }
 });
 
-/* ── builder ─────────────────────────────── */
+/* ── brief builder ───────────────────────── */
+document.getElementById('tiers').innerHTML = SCOPE.usage.map(function(u, i){
+  return '<li><label><input type="radio" name="usage" value="' + u.id + '"' +
+    (i === 0 ? ' checked' : '') + '>' +
+    '<span class="name">' + u.name + '</span></label></li>';
+}).join('');
 
-/* usage tiers */
-document.getElementById('tiers').innerHTML = PRICES.usage.map((u, i) =>
-  '<li><label><input type="radio" name="usage" value="' + u.id + '"' + (i === 0 ? ' checked' : '') + '>' +
-  '<span class="name">' + u.name + '</span>' +
-  '</label></li>').join('');
-
-/* one-off extras + monthly fees */
 document.getElementById('opts').innerHTML =
-  PRICES.addons.map(a =>
-    '<li><label><input type="checkbox" data-id="' + a.id + '">' +
-    '<span class="name">' + a.name + '</span>' +
-    '</label></li>').join('') +
-  PRICES.monthly.map(m =>
-    '<li data-row="' + m.id + '"><label><input type="checkbox" data-id="' + m.id + '">' +
-    '<span class="name">' + m.name + '</span>' +
-    '</label></li>').join('');
+  SCOPE.addons.map(function(a){
+    return '<li><label><input type="checkbox" data-id="' + a.id + '">' +
+      '<span class="name">' + a.name + '</span></label></li>';
+  }).join('') +
+  SCOPE.monthly.map(function(m){
+    return '<li data-row="' + m.id + '"><label><input type="checkbox" data-id="' + m.id + '">' +
+      '<span class="name">' + m.name + '</span></label></li>';
+  }).join('');
 
 let qty = 1;
 const qEl = document.getElementById('q');
-const box = id => document.querySelector('[data-id="' + id + '"]');
+function box(id){ return document.querySelector('[data-id="' + id + '"]'); }
 
-function price(){
-  const tier = PRICES.usage.find(u =>
-    document.querySelector('input[name="usage"]:checked').value === u.id);
+function brief(){
+  const chosen = document.querySelector('input[name="usage"]:checked').value;
+  const tier = SCOPE.usage.filter(function(u){ return u.id === chosen; })[0];
   const paid = tier.id !== 'organic';
   const months = tier.months;
 
-  PRICES.monthly.forEach(m => {
+  SCOPE.monthly.forEach(function(m){
     if(!m.needsPaid) return;
     const row = document.querySelector('[data-row="' + m.id + '"]');
     box(m.id).disabled = !paid;
@@ -521,17 +531,18 @@ function price(){
   const lines = [];
   lines.push(qty + ' video' + (qty > 1 ? 's' : ''));
   lines.push(tier.name);
-  PRICES.addons.forEach(a => { if(box(a.id).checked) lines.push(a.name); });
-  PRICES.monthly.forEach(m => {
+  SCOPE.addons.forEach(function(a){ if(box(a.id).checked) lines.push(a.name); });
+  SCOPE.monthly.forEach(function(m){
     if(box(m.id).checked && !box(m.id).disabled) lines.push(m.name + ' × ' + months + ' mo');
   });
 
-  document.getElementById('recap').innerHTML =
-    lines.map(l => '<li><span>' + l + '</span></li>').join('');
+  document.getElementById('recap').innerHTML = lines.map(function(l){
+    return '<li>' + l + '</li>';
+  }).join('');
 
   const body =
     'Hi Bianka,\n\nWe would like to book the following:\n\n' +
-    lines.map(l => '- ' + l).join('\n') +
+    lines.map(function(l){ return '- ' + l; }).join('\n') +
     '\n\nBrand:\nProduct:\nDeadline:\nBudget range:\n\nThanks,';
 
   document.getElementById('send').href =
@@ -540,23 +551,25 @@ function price(){
     '&body=' + encodeURIComponent(body);
 }
 
-document.getElementById('plus').onclick = () => { if(qty < 10){ qty++; qEl.textContent = qty; price(); } };
-document.getElementById('minus').onclick = () => { if(qty > 1){ qty--; qEl.textContent = qty; price(); } };
-document.getElementById('opts').addEventListener('change', price);
-document.getElementById('tiers').addEventListener('change', price);
-price();
+document.getElementById('plus').onclick = function(){ if(qty < 10){ qty++; qEl.textContent = qty; brief(); } };
+document.getElementById('minus').onclick = function(){ if(qty > 1){ qty--; qEl.textContent = qty; brief(); } };
+document.getElementById('opts').addEventListener('change', brief);
+document.getElementById('tiers').addEventListener('change', brief);
+brief();
 
 /* ── progress + reveals ──────────────────── */
 const bar = document.getElementById('bar');
-addEventListener('scroll', () => {
+addEventListener('scroll', function(){
   const h = document.documentElement.scrollHeight - innerHeight;
   bar.style.width = (h > 0 ? scrollY / h * 100 : 0) + '%';
 }, { passive:true });
 
-const rio = new IntersectionObserver(es => {
-  es.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); rio.unobserve(e.target); } });
+const rio = new IntersectionObserver(function(es){
+  es.forEach(function(e){
+    if(e.isIntersecting){ e.target.classList.add('in'); rio.unobserve(e.target); }
+  });
 }, { threshold:.15 });
-document.querySelectorAll('.rv').forEach(el => rio.observe(el));
+document.querySelectorAll('.rv').forEach(function(el){ rio.observe(el); });
 </script>
 </body>
 </html>
