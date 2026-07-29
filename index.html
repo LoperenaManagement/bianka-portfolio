@@ -213,7 +213,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
 <header class="topbar">
   <div class="wrap">
     <div class="mark">BIANKA GARCIA <span>/ UGC</span></div>
-    <nav class="topnav"><a href="#feed">Work</a><a href="#process">Process</a><a href="#build">Rates</a><a href="#contact">Book</a></nav>
+    <nav class="topnav"><a href="#feed">Work</a><a href="#process">Process</a><a href="#build">Scope</a><a href="#contact">Book</a></nav>
   </div>
   <i id="bar"></i>
 </header>
@@ -318,12 +318,10 @@ footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
         <ul class="opts" id="tiers"></ul>
         <p class="grp">Extras</p>
         <ul class="opts" id="opts"></ul>
-        <p class="fine">The base fee covers the video plus organic use on your own channels. Paid placement is licensed separately, priced against the base fee.</p>
+        <p class="fine">The base fee covers the video plus organic use on your own channels. Paid placement is licensed separately.</p>
       </div>
       <div class="total">
         <p class="kicker">Estimate</p>
-        <p class="big" id="sum">$0</p>
-        <p class="small">Indicative only. Final quote confirmed by email within one business day.</p>
         <ul class="recap" id="recap"></ul>
         <a class="btn btn-lime" id="send" href="#">Email this package</a>
       </div>
@@ -389,45 +387,6 @@ const WORK = [
   { tag:"travel", title:"Governors Island spa", desc:"Day-trip experience piece. Location, treatment and payoff inside twenty-five seconds.", img:null, video:"Media/governors_island_spa.mp4", views:null, url:"#", meta:["Day trip","Experience","25 sec"] }
 ];
 
-/* ══════════════════════════════════════════════════════
-   3. PRICING — put real numbers here before this goes live
-   ══════════════════════════════════════════════════════ */
-const PRICES = {
-
-  // Base fee per video. Buys the video plus organic use on the
-  // brand's own channels. Nothing paid is included.
-  perVideo: 200,
-
-  // Where the brand can run it. Priced as a % of the base fee,
-  // which is how the market prices rights. Pick one.
-  //   months  = how long, used to bill whitelisting and exclusivity
-  usage: [
-    { id:"organic", name:"Organic only, brand channels", pct:0,    months:3,  note:"included" },
-    { id:"paid3",   name:"Paid ads, 3 months",           pct:0.40, months:3 },
-    { id:"paid6",   name:"Paid ads, 6 months",           pct:0.75, months:6 },
-    { id:"perp",    name:"Perpetual rights",             pct:1.25, months:12 }
-  ],
-
-  // One-off extras, % of base fee.
-  addons: [
-    { id:"hooks", name:"Extra hook variation per video", pct:0.25 },
-    { id:"raw",   name:"Raw footage library",            pct:0.40 }
-  ],
-
-  // Billed every month the campaign runs, % of base fee per month.
-  // whitelisting needs a paid usage tier, so it greys out on organic.
-  monthly: [
-    { id:"white", name:"Whitelisting / Spark Ads", pct:0.30, needsPaid:true },
-    { id:"excl",  name:"Category exclusivity",     pct:0.25, needsPaid:false }
-  ],
-
-  // Automatic discount on the base fee for larger orders.
-  bundles: [
-    { min:10, pct:0.20 },
-    { min:5,  pct:0.15 },
-    { min:3,  pct:0.10 }
-  ]
-};
 const EMAIL = "loperenamanagementllc@gmail.com";
 
 /* ══ nothing below here needs editing ══════════════════ */
@@ -523,14 +482,11 @@ screen.addEventListener('keydown', e => {
 });
 
 /* ── builder ─────────────────────────────── */
-const money = n => '$' + Math.round(n).toLocaleString('en-US');
-const pctLabel = p => '+' + Math.round(p * 100) + '%';
 
 /* usage tiers */
 document.getElementById('tiers').innerHTML = PRICES.usage.map((u, i) =>
   '<li><label><input type="radio" name="usage" value="' + u.id + '"' + (i === 0 ? ' checked' : '') + '>' +
   '<span class="name">' + u.name + '</span>' +
-  '<span class="amt">' + (u.pct ? pctLabel(u.pct) : (u.note || 'included')) + '</span>' +
   '</label></li>').join('');
 
 /* one-off extras + monthly fees */
@@ -538,30 +494,22 @@ document.getElementById('opts').innerHTML =
   PRICES.addons.map(a =>
     '<li><label><input type="checkbox" data-id="' + a.id + '">' +
     '<span class="name">' + a.name + '</span>' +
-    '<span class="amt">' + pctLabel(a.pct) + '</span>' +
     '</label></li>').join('') +
   PRICES.monthly.map(m =>
     '<li data-row="' + m.id + '"><label><input type="checkbox" data-id="' + m.id + '">' +
     '<span class="name">' + m.name + '</span>' +
-    '<span class="amt">' + pctLabel(m.pct) + '/mo</span>' +
     '</label></li>').join('');
 
 let qty = 1;
 const qEl = document.getElementById('q');
 const box = id => document.querySelector('[data-id="' + id + '"]');
 
-function bundleRate(n){
-  const b = PRICES.bundles.find(b => n >= b.min);
-  return b ? b.pct : 0;
-}
-
 function price(){
   const tier = PRICES.usage.find(u =>
     document.querySelector('input[name="usage"]:checked').value === u.id);
-  const paid = tier.pct > 0;
+  const paid = tier.id !== 'organic';
   const months = tier.months;
 
-  /* whitelisting only exists on top of a paid tier */
   PRICES.monthly.forEach(m => {
     if(!m.needsPaid) return;
     const row = document.querySelector('[data-row="' + m.id + '"]');
@@ -570,47 +518,21 @@ function price(){
     row.style.opacity = paid ? '1' : '.4';
   });
 
-  const gross = PRICES.perVideo * qty;
-  const disc = gross * bundleRate(qty);
-  const base = gross - disc;
-
   const lines = [];
-  lines.push(['' + qty + ' video' + (qty > 1 ? 's' : '') + ' at ' + money(PRICES.perVideo), money(gross)]);
-  if(disc) lines.push(['Bundle discount ' + Math.round(bundleRate(qty) * 100) + '%', '−' + money(disc)]);
-
-  let total = base;
-
-  if(tier.pct){
-    const amt = base * tier.pct;
-    total += amt;
-    lines.push([tier.name, money(amt)]);
-  } else {
-    lines.push([tier.name, 'included']);
-  }
-
-  PRICES.addons.forEach(a => {
-    if(!box(a.id).checked) return;
-    const amt = base * a.pct;
-    total += amt;
-    lines.push([a.name, money(amt)]);
-  });
-
+  lines.push(qty + ' video' + (qty > 1 ? 's' : ''));
+  lines.push(tier.name);
+  PRICES.addons.forEach(a => { if(box(a.id).checked) lines.push(a.name); });
   PRICES.monthly.forEach(m => {
-    if(!box(m.id).checked || box(m.id).disabled) return;
-    const amt = base * m.pct * months;
-    total += amt;
-    lines.push([m.name + ' × ' + months + ' mo', money(amt)]);
+    if(box(m.id).checked && !box(m.id).disabled) lines.push(m.name + ' × ' + months + ' mo');
   });
 
-  document.getElementById('sum').textContent = money(total);
-  document.getElementById('recap').innerHTML = lines.map(l =>
-    '<li><span>' + l[0] + '</span><span>' + l[1] + '</span></li>').join('');
+  document.getElementById('recap').innerHTML =
+    lines.map(l => '<li><span>' + l + '</span></li>').join('');
 
   const body =
     'Hi Bianka,\n\nWe would like to book the following:\n\n' +
-    lines.map(l => '- ' + l[0] + ': ' + l[1]).join('\n') +
-    '\n\nIndicative total: ' + money(total) +
-    '\n\nBrand:\nProduct:\nDeadline:\n\nThanks,';
+    lines.map(l => '- ' + l).join('\n') +
+    '\n\nBrand:\nProduct:\nDeadline:\nBudget range:\n\nThanks,';
 
   document.getElementById('send').href =
     'mailto:' + EMAIL +
